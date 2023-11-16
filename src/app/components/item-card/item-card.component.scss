@@ -1,0 +1,40 @@
+.img-card-item {
+  margin: 0px -10px 17px -20px;
+  --background: #f5f5f5;
+  border-radius: unset
+}
+
+.img-card-item-basket {
+  margin: 17px 0 0 0;
+  --background: #f5f5f5;
+  border-radius: unset
+}
+
+.price-basket {
+  margin-right: 20px;
+}
+
+ion-col {
+  margin-left: 10px;
+  line-height: 0.5;
+  vertical-align: center
+}
+
+.price-item {
+  float: right;
+  font-weight: bold
+}
+
+div {
+  color: gray;
+  margin-left: 3px
+}
+
+h5 {
+  letter-spacing: 1px
+}
+
+ion-icon {
+  float: right;
+  margin: 2px
+}

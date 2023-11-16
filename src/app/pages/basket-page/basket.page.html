@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Panier
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <ion-grid *ngIf="!userService.isConnected() || getCart().cartLines.length === 0" style="text-align: center">
+    <ion-row>
+      <ion-col>
+        <ion-icon name="basket" style="color: grey" [ngStyle]="{ 'font-size': '128px' }"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label style="font-size: 20px; color: grey;">Votre panier est vide !</ion-label>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-label *ngIf="!userService.isConnected()" style="font-size: 15px; color: grey;">
+          Connectez-vous pour ajouter des items dans votre panier
+        </ion-label>
+        <ion-label *ngIf="userService.isConnected()" style="font-size: 15px; color: grey;">
+          Ajoutez dès à présent des articles dans votre panier
+        </ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <span *ngIf="userService.isConnected() && getCart().cartLines.length > 0">
+    <app-item-list-purchase [cart]="getCart()"></app-item-list-purchase>
+
+    <app-summary-modal *ngIf="isAddressComplete()" idTrigger="open-summary-modal"></app-summary-modal>
+    <div *ngIf="isAddressComplete()" style="text-align: center; margin-bottom: 20px">
+      <ion-button id="open-summary-modal">Procéder au paiement</ion-button>
+    </div>
+
+    <app-add-address-modal *ngIf="!isAddressComplete()" idTrigger="open-add-address-modal"></app-add-address-modal>
+    <div *ngIf="!isAddressComplete()" style="text-align: center; margin-bottom: 20px">
+      <ion-button id="open-add-address-modal">Ajouter une adresse</ion-button>
+    </div>
+  </span>
+  <ion-grid style="text-align: center">
+    <ion-row>
+      <ion-col>
+        <ion-label><b>{{"Articles disponibles" | uppercase}}</b></ion-label>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-item-list [allItems]="getAllBaseItem()"></app-item-list>
+</ion-content>

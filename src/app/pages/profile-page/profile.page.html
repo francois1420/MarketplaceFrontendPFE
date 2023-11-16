@@ -1,0 +1,116 @@
+<ion-menu *ngIf="isAdmin()" type="push" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu d'administration</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+
+    <!--    <app-profile-card-->
+    <!--      *ngIf="isAdmin()"-->
+    <!--      idCard="open-user-modal"-->
+    <!--      title="Voir les utilisateurs"-->
+    <!--      description="Ajouter ou modifier"-->
+    <!--      iconName="people">-->
+    <!--    </app-profile-card>-->
+
+    <app-profile-card
+      *ngIf="isAdmin()"
+      idCard="open-item-modal"
+      title="Voir les items"
+      description="Ajouter ou modifier"
+      iconName="pricetags"
+      routerLink="/tabs/items-administration">
+    </app-profile-card>
+
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons *ngIf="isAdmin()" slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Compte
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+
+  <h2>Bonjour {{ this.getActualUser().firstName }}</h2>
+
+  <app-profile-card
+    *ngIf="!isConnected()"
+    idCard="open-login-modal"
+    title="Se connecter"
+    description="Ayez une accès complet à l'application"
+    iconName="log-in">
+  </app-profile-card>
+
+  <app-login-modal
+    *ngIf="!isConnected()"
+    idTrigger="open-login-modal">
+  </app-login-modal>
+
+  <app-profile-card
+    *ngIf="!isConnected()"
+    idCard="open-register-modal"
+    title="S'inscrire"
+    description="Rejoignez notre communauté"
+    iconName="add-circle">
+  </app-profile-card>
+
+  <app-register-modal
+    *ngIf="!isConnected()"
+    idTrigger="open-register-modal">
+  </app-register-modal>
+
+  <app-profile-card
+    *ngIf="isConnected()"
+    idCard="open-orders-modal"
+    title="Commandes"
+    description="Suivez vos envois"
+    iconName="card">
+  </app-profile-card>
+
+  <app-orders-modal
+    *ngIf="isConnected()"
+    idTrigger="open-orders-modal">
+  </app-orders-modal>
+
+  <app-profile-card
+    *ngIf="isConnected()"
+    idCard="open-profile-modification-modal"
+    title="Profil"
+    description="Modifiez vos informations personnelles"
+    iconName="person">
+  </app-profile-card>
+
+  <app-profile-modification-modal
+    *ngIf="isConnected()"
+    idTrigger="open-profile-modification-modal">
+  </app-profile-modification-modal>
+
+  <app-profile-card
+    idCard="open-settings-modal"
+    title="Réglages"
+    description="Modifiez la langue et le thème"
+    iconName="settings">
+  </app-profile-card>
+
+  <app-settings-modal
+    idTrigger="open-settings-modal">
+  </app-settings-modal>
+
+  <app-profile-card
+    *ngIf="isConnected()"
+    (click)="disconnect()"
+    idCard="disconnect-card"
+    title="Se déconnecter"
+    description="Quittez le navire"
+    iconName="log-out">
+  </app-profile-card>
+</ion-content>
+</div>

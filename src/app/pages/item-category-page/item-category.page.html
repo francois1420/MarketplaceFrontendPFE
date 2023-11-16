@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Retour" defaultHref="" (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{category.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-searchbar placeholder="Rechercher" [(ngModel)]="search" (keyup.enter)="onSearchbarEnter()" ></ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-grid>
+    <p>Filtres<p>
+    <ion-row>
+      <ion-col>
+        <ion-select okText="Confirmer" cancel-text="Annuler" placeholder="Couleur"  (ionChange)="onChangeColor($event)">
+          <ion-select-option *ngFor="let couleur of colors" [value]="couleur">{{couleur}}</ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col>
+        <ion-select okText="Confirmer" cancel-text="Annuler" placeholder="Taille" (ionChange)="onChangeSize($event)">
+         <ion-select-option *ngFor="let size of sizes" [value]="size" class="size">{{size}}</ion-select-option>
+        </ion-select>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-item-list [allItems]="itemsToShow"></app-item-list>
+</ion-content>

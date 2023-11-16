@@ -1,0 +1,88 @@
+<ion-modal trigger="{{ 'item' + item.idItem }}">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Annuler</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <h5>Modifier un item</h5>
+      <form [formGroup]="updateItemForm">
+        <ion-item>
+          <ion-label position="stacked">Prix</ion-label>
+          <ion-input 
+            type="number" 
+            placeholder="item.price" 
+            [(ngModel)]="item.price"
+            formControlName="price">
+          </ion-input>
+          <span class="errorMessage" 
+            *ngIf="updateItemForm.controls['price'].hasError('required')">
+            Prix est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Stock</ion-label>
+          <ion-input 
+            type="number" 
+            placeholder="item.stock" 
+            [(ngModel)]="item.stock"
+            formControlName="stock">
+          </ion-input>
+          <span class="errorMessage" 
+            *ngIf="updateItemForm.controls['stock'].hasError('required')">
+            Stock est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Couleur</ion-label>
+          <ion-input 
+            type="text" 
+            placeholder="item.color" 
+            [(ngModel)]="item.color"
+            formControlName="color">
+          </ion-input>
+          <span class="errorMessage" 
+            *ngIf="updateItemForm.controls['color'].hasError('required')">
+            Couleur est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Taille</ion-label>
+          <ion-input 
+            type="text" 
+            placeholder="item.size" 
+            [(ngModel)]="item.size"
+            formControlName="size">
+          </ion-input>
+          <span class="errorMessage" 
+            *ngIf="updateItemForm.controls['size'].hasError('required')">
+            Taille est obligatoire
+          </span>
+        </ion-item>
+      </form>
+      <ion-row>
+        <ion-col class="add-image-button">
+          <ion-button (click)="addItemImageAlert()">
+            Ajouter une image &nbsp;
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <p *ngFor="let image of item.itemImages; let index = index">
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="Silhouette of mountains" [src]="image.urlImage" />
+          </ion-thumbnail>
+          <ion-label>
+            {{ "Image " + (index + 1) }}
+            <span *ngIf="index === 0">(Principale)</span>
+          </ion-label>
+        </ion-item>
+      </p>
+      <ion-button (click)="modifyItem()" [disabled]="updateItemForm.invalid" expand="full" class="modify-item-button">Modifier l'item</ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>

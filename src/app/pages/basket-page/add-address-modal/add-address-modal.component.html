@@ -1,0 +1,104 @@
+<ion-modal trigger="{{ idTrigger }}">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Annuler</ion-button>
+        </ion-buttons>
+        <ion-title>Ajouter une adresse</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <h5>Adresse</h5>
+      <form [formGroup]="addAddressForm">
+        <ion-item>
+          <ion-label position="stacked">Numéro de rue</ion-label>
+          <ion-input
+            type="number"
+            placeholder="1"
+            [(ngModel)]="addr.streetNumber"
+            formControlName="streetNumber">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="addAddressForm.controls['streetNumber'].hasError('required')">
+            Numéro de rue est obligatoire
+          </span>
+          <span class="errorMessage"
+            *ngIf="addAddressForm.controls['streetNumber'].hasError('pattern')">
+            Numéro de rue invalide
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Rue</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Rue du la richesse"
+            [(ngModel)]="addr.streetName"
+            formControlName="streetName">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="addAddressForm.controls['streetName'].hasError('required')">
+            Rue est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Code postal</ion-label>
+          <ion-input
+            type="number"
+            placeholder="1000"
+            [(ngModel)]="addr.zipCode"
+            formControlName="zipCode">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="addAddressForm.controls['zipCode'].hasError('required')">
+            Code postal est obligatoire
+          </span>
+          <span class="errorMessage"
+            *ngIf="addAddressForm.controls['zipCode'].hasError('pattern')">
+            Code postal invalide
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Ville</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Waterloo"
+            [(ngModel)]="addr.city"
+            formControlName="city">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="addAddressForm.controls['city'].hasError('required')">
+            Ville est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">État / Région</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Brabant Wallon"
+            [(ngModel)]="addr.state"
+            formControlName="state">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="addAddressForm.controls['state'].hasError('required')">
+            État / Région est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Pays</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Belgique"
+            [(ngModel)]="addr.country"
+            formControlName="country">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="addAddressForm.controls['country'].hasError('required')">
+            Pays est obligatoire
+          </span>
+        </ion-item>
+        <ion-button (click)="confirm()" expand="full" style="margin-top: 20px">Ajouter votre adresse</ion-button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

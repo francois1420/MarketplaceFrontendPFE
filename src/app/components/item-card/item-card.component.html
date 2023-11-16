@@ -1,0 +1,21 @@
+<ion-row>
+  <ion-col [routerLink]="isBasket ? ['/tabs/item-page/' + this.cartLine.item.baseItem.idBaseItem] : []" size="4">
+    <ion-card [ngClass]="isBasket ? 'img-card-item-basket' : 'img-card-item' ">
+      <ion-img [src]="this.cartLine.item.itemImages[0].urlImage" alt=""></ion-img>
+    </ion-card>
+  </ion-col>
+  <ion-col>
+    <h5>{{ this.cartLine.item.baseItem.name | titlecase }}
+      <ion-icon *ngIf="isBasket" (click)="showOptions(cartLine)" name="ellipsis-horizontal-outline"></ion-icon>
+    </h5>
+    <div>
+      <p>{{ this.cartLine.item.baseItem.description }}</p>
+      <p>Couleur : {{ this.cartLine.item.color || "Non indiqué" }}</p>
+      <p>Taille : {{ this.cartLine.item.size || "Non indiqué" }}</p>
+      <p>Quantité : {{ this.cartLine.quantity }}</p>
+      <p class="price-item" [ngClass]="isBasket ? 'price-basket' : '' ">
+        {{this.cartLine.item.price | currency: 'EUR'}}
+      </p>
+    </div>
+  </ion-col>
+</ion-row>

@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Marketplace
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-searchbar placeholder="Rechercher" [(ngModel)]="search" (keyup.enter)="onSearchbarEnter()" ></ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!---List de categorie-->
+  <div *ngIf="getCategories()">
+    <h5>Catégories</h5>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" *ngFor="let categorie of getCategories()">
+          <ion-card routerLink="/tabs/item-category/{{categorie.idCategory}}"
+                    class="ion-activatable ripple-parent rounded-rectangle">
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-row>
+              <ion-col>
+                <p>{{ categorie.name }}</p>
+              </ion-col>
+              <ion-col>
+                <img class="img_cat" alt="" [src]="categorie.urlImage"/>
+              </ion-col>
+            </ion-row>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!--List des items populaire-->
+  <h5>Populaire</h5>
+  <app-item-list [allItems]="getBaseItems()"></app-item-list>
+</ion-content>

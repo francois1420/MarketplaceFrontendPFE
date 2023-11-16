@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Administration des items</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<app-add-base-item-modal idTrigger="open-add-base-item-modal"></app-add-base-item-modal>
+
+<ion-content>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button id="open-add-base-item-modal">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list>
+    <ion-item [id]="baseItem.idBaseItem" *ngFor="let baseItem of getAllBaseItems()" button>
+      <ion-label>
+        <h3>{{ baseItem.name }}</h3>
+        <p>{{ baseItem.description }}</p>
+      </ion-label>
+      <app-update-base-item-modal [baseItem]="baseItem"></app-update-base-item-modal>
+    </ion-item>
+  </ion-list>
+</ion-content>

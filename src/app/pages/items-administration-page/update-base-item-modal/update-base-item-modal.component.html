@@ -1,0 +1,62 @@
+<ion-modal trigger="{{ baseItem.idBaseItem }}">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Annuler</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <app-add-item-modal idTrigger="open-add-item-modal" [baseItem]="baseItem"></app-add-item-modal>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+        <ion-fab-button id="open-add-item-modal">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      <h5>Modifier un item de base</h5>
+      <form [formGroup]="updateBaseItemForm">
+        <ion-item>
+          <ion-label position="stacked">Nom</ion-label>
+          <ion-input 
+            type="text" 
+            placeholder="baseItem.name" 
+            [(ngModel)]="baseItem.name"
+            formControlName="name">
+          </ion-input>
+          <span class="errorMessage" 
+            *ngIf="updateBaseItemForm.controls['name'].hasError('required')">
+            Nom est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Description</ion-label>
+          <ion-input 
+            type="text" 
+            placeholder="baseItem.description" 
+            [(ngModel)]="baseItem.description"
+            formControlName="description">
+          </ion-input>
+          <span class="errorMessage" 
+            *ngIf="updateBaseItemForm.controls['description'].hasError('required')">
+            Description est obligatoire
+          </span>
+        </ion-item>
+        <ion-button (click)="modifyBaseItem()" [disabled]="updateBaseItemForm.invalid" expand="full" class="modify-base-item-button">Modifier l'item de base</ion-button>
+      </form>
+      <span *ngFor="let item of baseItem.items; let index = index">
+        <app-update-item-modal [item]="item"></app-update-item-modal>
+        <ion-item [id]="'item' + item.idItem" detail="true" button>
+          <ion-thumbnail *ngIf="item.itemImages.length > 0" slot="start">
+            <img alt="Silhouette of mountains" [src]="item.itemImages[0].urlImage" />
+          </ion-thumbnail>
+          <ion-label>
+            <h3>{{ item.color + " " + item.size }}</h3>
+            <p>Prix : {{ item.price | currency: 'EUR' }}</p>
+            <p>Stock : {{ item.stock }}</p>
+          </ion-label>
+        </ion-item>
+      </span>
+    </ion-content>
+  </ng-template>
+</ion-modal>

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Retour" defaultHref="" (click)="goBack()"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="searchParam !== ''">{{searchParam}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-searchbar placeholder="Rechercher" [(ngModel)]="searchParam" (keyup.enter)="onSearchbarEnter()" ></ion-searchbar>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <app-item-list [allItems]="itemList"></app-item-list>
+</ion-content>

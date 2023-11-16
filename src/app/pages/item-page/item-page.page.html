@@ -1,0 +1,51 @@
+
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button text="Retour" defaultHref="" (click)="goBack()"></ion-back-button>
+      </ion-buttons>
+    <ion-title>{{base_item.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf ="base_item">
+    <ion-slides [pager]="true">
+      <ion-slide *ngFor="let image of selected_item.itemImages">
+        <ion-img [src]="image.urlImage" alt=""></ion-img>
+      </ion-slide>
+    </ion-slides>
+      <ion-grid>
+        <ion-row style="margin: 0 10px 0 10px">
+          <ion-col size="8">
+            <h5 style="letter-spacing: 4px;" class="ion-text-left">{{base_item.name}}</h5>
+          </ion-col>
+          <ion-col size="4">
+            <h5 class="ion-text-right">{{price | currency: 'EUR'}}</h5>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="display: flex; justify-content: center;">
+            <ion-select okText="Confirmer" cancel-text="Annuler" placeholder="Couleur" (ionChange)="onChangeColor($event)">
+              <ion-select-option *ngFor="let color of colors_keys" [value]="color">{{color}}</ion-select-option>
+            </ion-select>
+          </ion-col>
+          <ion-col style="display: flex; justify-content: center;">
+              <ion-select okText="Confirmer" cancel-text="Annuler" placeholder="Taille" (ionChange)="onChangeSize($event)">
+                <ion-select-option *ngFor="let size of sizes_keys" [value]="size" class="size">{{size}}</ion-select-option>
+              </ion-select>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div class="ion-text-center">
+        <ion-button style="margin: 30px 0" size="medium" (click)="addToCart()" [disabled]="not_available">
+          Ajouter dans le panier
+          <ion-icon slot="end" name="cart"></ion-icon>
+        </ion-button>
+      </div>
+      <div *ngIf="similar_items.length !== 0">
+        <h5 style="margin-left: 10px">Produits similaires</h5>
+        <app-item-list [allItems]="similar_items"></app-item-list>
+      </div>
+    </div>
+</ion-content>

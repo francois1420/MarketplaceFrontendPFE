@@ -1,0 +1,10 @@
+
+<span *ngFor="let cartLine of cart.cartLines">
+  <app-item-card [isBasket]="!isSummary" [cartLine]="cartLine"></app-item-card>
+</span>
+
+<h5 style="margin-top: 10px" [ngClass]="!isSummary ? 'resume-cart-basket' : 'resume-cart-summary'">
+  Total
+  <span style="font-size: 10px; color: grey; font-weight: unset">TVA Incl.</span>
+  <span style="float: right">{{ getAmount().toString() | currency: 'EUR' }}</span>
+</h5>

@@ -1,0 +1,156 @@
+<ion-modal trigger="{{ idTrigger }}">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Annuler</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <h5>Informations personnelles</h5>
+      <form [formGroup]="profileForm">
+        <ion-item>
+          <ion-label position="stacked">Nom</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="getUser().lastName"
+            formControlName="lastName">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['lastName'].hasError('required')">
+            Nom est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Prénom</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="getUser().firstName"
+            formControlName="firstName">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['firstName'].hasError('required')">
+            Prénom est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input
+            type="email"
+            [(ngModel)]="getUser().email"
+            formControlName="email">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['email'].hasError('required')">
+            Email est obligatoire
+          </span>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['email'].hasError('pattern')">
+            Email invalide
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Numéro de téléphone</ion-label>
+          <ion-input
+            type="number"
+            [(ngModel)]="getUser().phoneNumber"
+            formControlName="phoneNumber">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['phoneNumber'].hasError('pattern')">
+            Numéro de téléphone invalide
+          </span>
+        </ion-item>
+        <h5>Adresse</h5>
+        <ion-item>
+          <ion-label position="stacked">Numéro de rue</ion-label>
+          <ion-input
+            type="number"
+            placeholder="1"
+            [(ngModel)]="getUser().address.streetNumber"
+            formControlName="streetNumber">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['streetNumber'].hasError('required')">
+            Numéro de rue est obligatoire
+          </span>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['streetNumber'].hasError('pattern')">
+            Numéro de rue invalide
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Rue</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Rue du la richesse"
+            [(ngModel)]="getUser().address.streetName"
+            formControlName="streetName">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['streetName'].hasError('required')">
+            Rue est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Code postal</ion-label>
+          <ion-input
+            type="number"
+            placeholder="1000"
+            [(ngModel)]="getUser().address.zipCode"
+            formControlName="zipCode">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['zipCode'].hasError('required')">
+            Code postal est obligatoire
+          </span>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['zipCode'].hasError('pattern')">
+            Code postal invalide
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Ville</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Waterloo"
+            [(ngModel)]="getUser().address.city"
+            formControlName="city">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['city'].hasError('required')">
+            Ville est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">État / Région</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Brabant Wallon"
+            [(ngModel)]="getUser().address.state"
+            formControlName="state">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['state'].hasError('required')">
+            État / Région est obligatoire
+          </span>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Pays</ion-label>
+          <ion-input
+            type="text"
+            placeholder="Belgique"
+            [(ngModel)]="getUser().address.country"
+            formControlName="country">
+          </ion-input>
+          <span class="errorMessage"
+            *ngIf="profileForm.controls['country'].hasError('required')">
+            Pays est obligatoire
+          </span>
+        </ion-item>
+        <ion-button class="connect-button" (click)="confirm()" [disabled]="profileForm.invalid" expand="full">Changer vos informations</ion-button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

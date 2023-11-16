@@ -1,0 +1,24 @@
+<ion-modal trigger="{{ idTrigger }}">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancel()">Annuler</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content *ngIf="true" class="ion-padding">
+      <h5>Mes commandes</h5>
+      <ion-accordion-group [multiple]="true">
+        <ion-accordion *ngFor="let cart of getHistory().slice().reverse()" [value]="cart.idCart">
+          <ion-item slot="header" color="light">
+            <ion-label>Commande du {{ cart.boughtDate | date: 'dd/MM/yy à HH:mm' }}</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <app-item-list-purchase [cart]="cart" [isSummary]="true"></app-item-list-purchase>
+          </div>
+        </ion-accordion>
+      </ion-accordion-group>
+    </ion-content>
+  </ng-template>
+</ion-modal>
